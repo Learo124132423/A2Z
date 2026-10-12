@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="km" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>A2Z - Go from Point A to Point Z | សេវាស្ទូច និងសង្គ្រោះរថយន្ត 24/7</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        a2zYellow: '#FFB800',
+                        a2zYellowDark: '#E6A600',
+                        grabGreen: '#00A651',
+                    },
+                    fontFamily: {
+                        sans: ['Kantumruy Pro', 'Inter', 'sans-serif'],
+                    },
+                    screens: {
+                        'fold': '280px',
+                        'xs': '380px',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Kantumruy Pro & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300..700;1,300..700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Kantumruy Pro', 'Inter', sans-serif;
+            word-break: break-word;
+        }
+        .a2z-shadow {
+            box-shadow: 0 12px 35px -5px rgba(255, 184, 0, 0.25);
+        }
+        .hero-gradient-light {
+            background: radial-gradient(circle at 50% 10%, rgba(255, 184, 0, 0.22) 0%, rgba(255, 255, 255, 0) 75%),
+                        radial-gradient(circle at 100% 0%, rgba(255, 184, 0, 0.08) 0%, transparent 60%);
+        }
+        .hero-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 60% 40%, rgba(255, 184, 0, 0.12) 0%, transparent 55%);
+            pointer-events: none;
+        }
+        .select-custom-arrow {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23FFB800'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.6rem center;
+            background-size: 1rem;
+        }
+        .dropdown-anim {
+            animation: dropdownIn 0.18s ease-out;
+        }
+        @keyframes dropdownIn {
+            from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .brand-swoosh {
+            display: inline-block;
+            width: 80px;
+            height: 8px;
+            margin-top: 0.5rem;
+        }
+        .brand-swoosh svg {
+            width: 100%;
+            height: 100%;
+        }
+        .icon-chip-solid {
+            background-color: #FFB800;
+            color: #0F172A;
+            box-shadow: 0 2px 8px rgba(255, 184, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased transition-colors duration-300 min-h-screen flex flex-col">
+
+    <header class="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-white/90 border-b border-slate-200 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between">
+            
+            <!-- Hamburger Menu Button (3-line menu bar) with A2Z Name -->
+            <div class="flex items-center space-x-2.5 shrink-0">
+                <div class="relative" id="menu-wrap">
+                    <button id="menu-toggle" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all border border-slate-200 flex items-center justify-center">
+                        <i data-lucide="menu" class="w-6 h-6" id="menu-icon-open"></i>
+                        <i data-lucide="x" class="w-6 h-6 hidden" id="menu-icon-close"></i>
+                    </button>
+
+                    <div id="menu-dropdown" class="absolute left-0 top-full mt-2 w-64 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 hidden origin-top-left dropdown-anim">
+                        <nav class="flex flex-col">
+                            <a href="#features" onclick="closeMenu()" class="px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 hover:text-a2zYellow transition-colors" data-i18n="navFeatures">ហេតុអ្វីអ្នកប្រហែលជាត្រូវការ A2Z</a>
+                            <a href="#how-it-works" onclick="closeMenu()" class="px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 hover:text-a2zYellow transition-colors" data-i18n="navHowItWorks">របៀបប្រើប្រាស់</a>
+                            <a href="#safety" onclick="closeMenu()" class="px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 hover:text-a2zYellow transition-colors" data-i18n="navSafety">សុវត្ថិភាព និងទំនុកចិត្ត</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- A2Z Name -->
+                <a href="#" onclick="scrollToTop()" class="cursor-pointer" aria-label="Scroll to top">
+                    <img src="A2Z_NAME.png" alt="A2Z" class="h-8 sm:h-10 w-auto">
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-700">
+                <a href="#features" class="hover:text-a2zYellow transition-colors" data-i18n="navFeatures">ហេតុអ្វីអ្នកប្រហែលជាត្រូវការ A2Z</a>
+                <a href="#how-it-works" class="hover:text-a2zYellow transition-colors" data-i18n="navHowItWorks">របៀបប្រើប្រាស់</a>
+                <a href="#safety" class="hover:text-a2zYellow transition-colors" data-i18n="navSafety">សុវត្ថិភាព និងទំនុកចិត្ត</a>
+            </nav>
+
+            <div class="flex items-center space-x-2.5 sm:space-x-3.5">
+                <!-- Custom Language Dropdown -->
+                <div class="relative" id="lang-dropdown">
+                    <button onclick="toggleLangDropdown()" class="flex items-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-slate-200 transition-all cursor-pointer" aria-label="Select language" aria-haspopup="listbox" aria-expanded="false">
+                        <i data-lucide="globe" class="w-4 h-4 text-a2zYellow"></i>
+                        <span id="lang-label">ភាសាខ្មែរ</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 transition-transform" id="lang-chevron"></i>
+                    </button>
+                    <div id="lang-menu" class="absolute right-0 mt-2 w-44 bg-white border border-slate-200 rounded-2xl shadow-xl p-2 hidden origin-top-right dropdown-anim" role="listbox">
+                        <button onclick="selectLang('km')" class="w-full flex items-center space-x-2 py-1.5 px-0 text-slate-900 hover:bg-slate-100 rounded-xl transition-colors" role="option" aria-selected="true" data-lang="km">
+                            <span data-i18n="langKm">ភាសាខ្មែរ</span>
+                            <i data-lucide="check" class="w-4 h-4 text-a2zYellow ml-auto hidden" id="lang-km-check"></i>
+                        </button>
+                        <button onclick="selectLang('en')" class="w-full flex items-center space-x-2 py-1.5 px-0 text-slate-900 hover:bg-slate-100 rounded-xl transition-colors" role="option" aria-selected="false" data-lang="en">
+                            <span data-i18n="langEn">English</span>
+                            <i data-lucide="check" class="w-4 h-4 text-a2zYellow ml-auto hidden" id="lang-en-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2.5 sm:space-x-3.5">
+                <!-- Emergency Contact Button -->
+                <button onclick="openModal('contact-modal')" class="hidden xs:flex bg-a2zYellow hover:bg-a2zYellowDark text-slate-950 font-extrabold px-4 sm:px-5 py-2.5 rounded-xl transition-all shadow-md shadow-a2zYellow/25 transform hover:-translate-y-0.5 text-xs sm:text-sm items-center space-x-1.5" data-i18n="navContact">
+                    ទាក់ទងយើង
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative pt-28 pb-12 sm:pt-32 sm:pb-16 lg:pt-36 lg:pb-20 overflow-hidden hero-gradient-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-5 sm:space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-a2zYellow/15 border border-a2zYellow/30 text-amber-700 text-xs sm:text-sm font-bold tracking-wide">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-a2zYellow"></i>
+                        <span data-i18n="heroBadge">សេវាសង្គ្រោះរថយន្ត 24/7 នៅកម្ពុជា</span>
+                    </div>
+
+                    <h1 class="text-3xl fold:text-2xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.2]">
+                        <span>A2Z . </span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 via-a2zYellow to-yellow-400" data-i18n="heroTitleHighlight">
+                            Go from Point A to Point Z
+                        </span>
+                    </h1>
+
+                    <p class="text-sm sm:text-base lg:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0" data-i18n="heroSubtitle">
+                        A2Z can help you off the road instantly with verified tow truck operators.
+                    </p>
+
+                    <div class="flex flex-col xs:flex-row gap-3.5 sm:gap-4 justify-center lg:justify-start">
+                        <a href="#safety" class="bg-a2zYellow hover:bg-a2zYellowDark text-slate-950 font-extrabold px-6 py-3.5 sm:py-4 rounded-xl transition-all shadow-lg shadow-a2zYellow/25 flex items-center justify-center space-x-2 transform hover:-translate-y-0.5 text-sm sm:text-base">
+                            <span data-i18n="heroBtnSafety">ស្វែងយល់ពីសុវត្ថិភាព</span>
+                            <i data-lucide="arrow-down" class="w-4 h-4 text-slate-950"></i>
+                        </a>
+                    </div>
+
+                    <div class="pt-5 grid grid-cols-3 gap-2 sm:gap-4 border-t border-slate-200 max-w-md mx-auto lg:mx-0 text-center lg:text-left">
+                        <div>
+                            <div class="text-lg sm:text-2xl font-black text-slate-900">24/7</div>
+                            <div class="text-[11px] sm:text-xs text-slate-500 mt-0.5" data-i18n="statNight">24/7 មិនថ្ងៃយប់</div>
+                        </div>
+                        <div>
+                            <div class="text-lg sm:text-2xl font-black text-amber-600">&lt; 15 min</div>
+                            <div class="text-[11px] sm:text-xs text-slate-500 mt-0.5" data-i18n="statDispatch">មកដល់លឿនរហ័ស</div>
+                        </div>
+                        <div>
+                            <div class="text-lg sm:text-2xl font-black text-slate-900">100%</div>
+                            <div class="text-[11px] sm:text-xs text-slate-500 mt-0.5" data-i18n="statVerified">អ្នកបើកបរផ្ទៀងផ្ទាត់</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white a2z-shadow">
+                        <div class="hero-glow"></div>
+                        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80" alt="A2Z Tow Truck Roadside Assistance" class="w-full h-[280px] sm:h-[380px] lg:h-[420px] object-cover transform hover:scale-105 transition-transform duration-700" onerror="this.src='https://placehold.co/600x400/1E293B/FFB800?text=A2Z+Towing+Cambodia'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent flex flex-col justify-end p-5 sm:p-6 text-white">
+                            <div class="flex items-center space-x-2 text-a2zYellow text-xs font-extrabold uppercase tracking-wider mb-1">
+                                <span class="w-2.5 h-2.5 rounded-full bg-a2zYellow animate-pulse"></span>
+                                <span data-i18n="liveRescue">ប្រព័ន្ធស្ទូចកំពុងដំណើរការ</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-bold" data-i18n="heroCardTitle">ភ្នំពេញ និងខេត្តធំៗ</h3>
+                            <p class="text-xs text-slate-300 mt-0.5" data-i18n="heroCardDesc">រថយន្តស្ទូចទំនើបត្រៀមខ្លួនរួចជាស្រេចនៅទីតាំង GPS របស់អ្នក។</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="py-12 sm:py-16 bg-white border-y border-slate-200 transition-colors duration-300 scroll-mt-24 sm:scroll-mt-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                <span class="text-a2zYellow text-xs font-extrabold uppercase tracking-widest" data-i18n="stepsSub">ងាយស្រួល និងរហ័ស</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight mt-1.5" data-i18n="stepsTitle">របៀបប្រើប្រាស់ A2Z</h2>
+                <span class="brand-swoosh mx-auto">
+                    <svg viewBox="0 0 80 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 4 Q 20 10 40 4 T 78 4" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base" data-i18n="stepsDesc">3 ជំហានងាយៗដើម្បីជួយសង្គ្រោះរថយន្តរបស់អ្នកនៅពេលយប់ជ្រៅ។</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-xl hover:border-a2zYellow transition-all group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center font-black text-xl mb-5 group-hover:scale-110 transition-transform">
+                        01
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2" data-i18n="step1Title">1. ស្នើសុំស្ទូចឡាន</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed" data-i18n="step1Desc">
+                        បើកកម្មវិធី A2Z ចុច 'ស្នើសុំស្ទូច' បញ្ជាក់ទីតាំង និងជ្រើសរើសប្រភេទរថយន្តរបស់អ្នក។
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-xl hover:border-a2zYellow transition-all group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center font-black text-xl mb-5 group-hover:scale-110 transition-transform">
+                        02
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2" data-i18n="step2Title">2. ទទួលការមកដល់លឿន</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed" data-i18n="step2Desc">
+                        អ្នកបើកបរស្ទូចដែលនៅជិតបំផុតនឹងទទួលការងារ និងបើកមករកអ្នកផ្ទាល់យ៉ាងលឿន។
+                    </p>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-xl hover:border-a2zYellow transition-all group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center font-black text-xl mb-5 group-hover:scale-110 transition-transform">
+                        03
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 mb-2" data-i18n="step3Title">3. បញ្ជូនដល់ទីតាំង</h3>
+                    <p class="text-slate-600 text-xs sm:text-sm leading-relaxed" data-i18n="step3Desc">
+                        រថយន្តរបស់អ្នកត្រូវបានដឹកជញ្ជូនដោយសុវត្ថិភាពទៅកាន់ហាងជួសជុល ឬជាងដែលអ្នកទុកចិត្ត។
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-12 sm:py-16 relative overflow-hidden scroll-mt-24 sm:scroll-mt-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+                
+                <div class="space-y-5">
+                    <span class="text-a2zYellow text-xs font-extrabold uppercase tracking-widest" data-i18n="featuresSub">បង្កើតឡើងសម្រាប់កម្ពុជា</span>
+                    
+                    <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight" data-i18n="featuresTitle">
+                        Why you might need A2Z
+                    </h2>
+                    <span class="brand-swoosh lg:mx-0 mx-auto block">
+                        <svg viewBox="0 0 80 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 4 Q 20 10 40 4 T 78 4" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                    
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed" data-i18n="featuresDesc">
+                        A2Z can help you off the road instantly with verified tow truck operators.
+                    </p>
+
+                    <div class="space-y-3.5 pt-1">
+                        <div class="flex items-start space-x-3.5">
+                            <div class="w-8 h-8 rounded-xl bg-a2zYellow text-slate-950 flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                                <i data-lucide="check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 font-bold text-sm sm:text-base" data-i18n="feat1Title">សង្គ្រោះបន្ទាន់ 24/7</h4>
+                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5" data-i18n="feat1Desc">លែងបារម្ភពេលឡានខូចលើផ្លូវងងឹតពេលជាងបិទទ្វារ។</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3.5">
+                            <div class="w-8 h-8 rounded-xl bg-a2zYellow text-slate-950 flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                                <i data-lucide="check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 font-bold text-sm sm:text-base" data-i18n="feat2Title">តម្លៃច្បាស់លាស់មុនហៅ</h4>
+                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5" data-i18n="feat2Desc">គ្មានការគិតប្រាក់លាក់បាំង ដឹងតម្លៃមុនពេលសម្រេចចិត្ត។</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-3.5">
+                            <div class="w-8 h-8 rounded-xl bg-a2zYellow text-slate-950 flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                                <i data-lucide="check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 font-bold text-sm sm:text-base" data-i18n="feat3Title">តាមដានផែនទីផ្ទាល់</h4>
+                                <p class="text-slate-600 text-xs sm:text-sm mt-0.5" data-i18n="feat3Desc">មើលរថយន្តស្ទូចបើកមករកអ្នកលើផែនទីផ្ទាល់ តាមទូរស័ព្ទរបស់អ្នក។</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-xl">
+                    <div class="flex items-center justify-between pb-5 border-b border-slate-100">
+                        <div class="flex items-center space-x-2.5">
+                            <div class="w-3 h-3 rounded-full bg-a2zYellow animate-ping"></div>
+                            <span class="text-xs sm:text-sm font-bold text-amber-600" data-i18n="driverDispatched">អ្នកបើកបរបានទទួលការងារ (1.8 km)</span>
+                        </div>
+                        <span class="text-[11px] text-slate-400 font-mono">#A2Z-KH88</span>
+                    </div>
+
+                    <div class="py-5 space-y-4">
+                        <div class="flex items-center space-x-4 bg-slate-50 p-3.5 sm:p-4 rounded-2xl border border-slate-200">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl shrink-0 bg-[#F1F2F2] flex items-center justify-center overflow-hidden">
+                                <svg viewBox="0 0 96 96" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="48" cy="34" r="16" fill="#C7C9CC"/>
+                                    <path d="M20 88 C22 62 34 50 48 50 C62 50 74 62 76 88 Z" fill="#C7C9CC"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-slate-900 font-bold text-sm sm:text-base">ពិសិដ្ឋ វ៉ាន់ (Piseth)</h4>
+                                <p class="text-xs text-slate-500" data-i18n="driverInfo">អ្នកជំនាញស្ទូចឡាន • 4.9 ★ (284 Trips)</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5 text-xs sm:text-sm">
+                            <div class="flex justify-between text-slate-600">
+                                <span data-i18n="pickupLabel">ទីតាំងទទួល</span>
+                                <span class="text-slate-900 font-bold text-right ml-2" data-i18n="pickupLocation">មហាវិថីសហព័ន្ធរុស្ស៊ី ភ្នំពេញ</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span data-i18n="dropLabel">ទីតាំងជួសជុល</span>
+                                <span class="text-slate-900 font-bold text-right ml-2" data-i18n="dropLocation">ការ៉ាស់ជួសជុលរថយន្ត 24/7</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600 pt-2.5 border-t border-slate-100">
+                                <span data-i18n="etaLabel">ការរំពឹងទុកមកដល់</span>
+                                <span class="text-amber-600 font-black text-base">9 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-a2zYellow/10 border border-a2zYellow/20 rounded-2xl p-3.5 flex items-center space-x-3">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-a2zYellow shrink-0"></i>
+                        <p class="text-xs text-slate-700 font-medium" data-i18n="insuranceNote">មានអាជ្ញាធរ និងធានារ៉ាប់រងពេញលេញសម្រាប់ការដឹកជញ្ជូនពេលយប់។</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="safety" class="py-12 sm:py-16 bg-slate-100 border-t border-slate-200 transition-colors duration-300 scroll-mt-24 sm:scroll-mt-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+                <span class="text-a2zYellow text-xs font-extrabold uppercase tracking-widest" data-i18n="safetySub">សុវត្ថិភាពជាចម្បង</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight mt-1.5" data-i18n="safetyTitle">ការធានាសុវត្ថិភាព និងទំនុកចិត្ត</h2>
+                <span class="brand-swoosh mx-auto">
+                    <svg viewBox="0 0 80 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 4 Q 20 10 40 4 T 78 4" stroke="#FFB800" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base" data-i18n="safetyDesc">យើងផ្តល់អាទិភាពលើសុវត្ថិភាព និងភាពស្ងប់ចិត្តរបស់អ្នករាល់ពេលមានអាសន្ន។</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                <div onclick="openSafetyModal(1)" class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:border-a2zYellow transition-all cursor-pointer group">
+                    <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center mb-3 group-hover:bg-a2zYellow group-hover:text-slate-950 transition-colors">
+                        <i data-lucide="user-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5" data-i18n="s1Title">អ្នកបើកបរផ្ទៀងផ្ទាត់</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="s1Desc">ពិនិត្យប្រវត្តិរូបស្អាតស្អំ និងប័ណ្ណបើកបរពាណិជ្ជកម្មត្រឹមត្រូវ។</p>
+                    <div class="mt-4 flex items-center text-xs font-bold text-amber-600">
+                        <span data-i18n="learnMore">អានបន្ថែម</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
+                    </div>
+                </div>
+
+                <div onclick="openSafetyModal(2)" class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:border-a2zYellow transition-all cursor-pointer group">
+                    <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center mb-3 group-hover:bg-a2zYellow group-hover:text-slate-950 transition-colors">
+                        <i data-lucide="map-pin" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5" data-i18n="s2Title">ចែករំលែក GPS ផ្ទាល់</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="s2Desc">ចែករំលែកទីតាំង និងព័ត៌មានអ្នកបើកបរទៅកាន់គ្រួសារបានភ្លាមៗ។</p>
+                    <div class="mt-4 flex items-center text-xs font-bold text-amber-600">
+                        <span data-i18n="learnMore">អានបន្ថែម</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
+                    </div>
+                </div>
+
+                <div onclick="openSafetyModal(3)" class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:border-a2zYellow transition-all cursor-pointer group">
+                    <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center mb-3 group-hover:bg-a2zYellow group-hover:text-slate-950 transition-colors">
+                        <i data-lucide="phone-call" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5" data-i18n="s3Title">ខ្សែទូរស័ព្ទជំនួយ 24/7</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="s3Desc">ទាក់ទងផ្ទាល់មកកាន់ក្រុមការងារសង្គ្រោះបន្ទាន់បានគ្រប់ពេល។</p>
+                    <div class="mt-4 flex items-center text-xs font-bold text-amber-600">
+                        <span data-i18n="learnMore">អានបន្ថែម</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
+                    </div>
+                </div>
+
+                <div onclick="openSafetyModal(4)" class="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm hover:shadow-xl hover:border-a2zYellow transition-all cursor-pointer group">
+                    <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center mb-3 group-hover:bg-a2zYellow group-hover:text-slate-950 transition-colors">
+                        <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-1.5" data-i18n="s4Title">គោលការណ៍តម្លៃសមរម្យ</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed" data-i18n="s4Desc">គណនាតម្លៃច្បាស់លាស់មុនហៅ គ្មានការទារប្រាក់លើសលុបពេលយប់។</p>
+                    <div class="mt-4 flex items-center text-xs font-bold text-amber-600">
+                        <span data-i18n="learnMore">អានបន្ថែម</span>
+                        <i data-lucide="chevron-right" class="w-4 h-4 ml-0.5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-auto bg-white border-t-2 border-a2zYellow py-8 text-slate-500 text-xs sm:text-sm transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center space-x-3">
+                <img src="A2Z_NAME.png" alt="A2Z" class="h-8 sm:h-10 w-auto">
+            </div>
+            
+            <p class="text-center md:text-left text-xs leading-relaxed" data-i18n="copyright">
+                © 2026 A2Z Technologies Inc. រក្សាសិទ្ធិគ្រប់យ៉ាង។ សេវាស្ទូច និងសង្គ្រោះរថយន្តនៅកម្ពុជា។
+            </p>
+
+            <div class="flex flex-wrap justify-center items-center gap-4 text-xs font-semibold">
+                <button onclick="openModal('privacy-modal')" class="hover:text-amber-600 transition-colors" data-i18n="privacy">គោលការណ៍ឯកជនភាព</button>
+                <span class="text-slate-300">•</span>
+                <button onclick="openModal('terms-modal')" class="hover:text-amber-600 transition-colors" data-i18n="terms">លក្ខខណ្ឌសេវាកម្ម</button>
+                <span class="text-slate-300">•</span>
+                <button onclick="openModal('contact-modal')" class="hover:text-amber-600 transition-colors" data-i18n="contact">ទាក់ទងជំនួយ</button>
+            </div>
+        </div>
+    </footer>
+
+    <div id="privacy-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-sm hidden p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeModal('privacy-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center">
+                    <i data-lucide="shield" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="privacy">គោលការណ៍ឯកជនភាព</h3>
+                <div class="text-slate-600 text-xs sm:text-sm space-y-3 leading-relaxed">
+                    <p data-i18n="privacyText1">នៅ A2Z Technologies យើងគោរពឯកជនភាពរបស់អ្នក និងប្តេជ្ញាការពារទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នក នៅពេលអ្នកស្នើសុំសេវាស្ទូច និងសង្គ្រោះបន្ទាន់នៅកម្ពុជា។</p>
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base pt-2" data-i18n="privacyHeader1">1. ព័ត៌មានដែលយើងប្រមូល</h4>
+                    <p data-i18n="privacyText2">យើងប្រមូលកូអរដោនេ GPS លេខទូរស័ព្ទ និងព័ត៌មានរថយន្តរបស់អ្នក ដើម្បីភ្ជាប់ទំនាក់ទំនងជាមួយអ្នកបើកបរស្ទូច។</p>
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base pt-2" data-i18n="privacyHeader2">2. ការប្រើប្រាស់ទិន្នន័យ</h4>
+                    <p data-i18n="privacyText3">ទិន្នន័យទីតាំងរបស់អ្នកត្រូវបានប្រកាសតែនៅពេលអ្នកស្នើសុំសង្គ្រោះប៉ុណ្ណោះ។ យើងមិនដែលលក់ទិន្នន័យរបស់អ្នកទៅកាន់ភាគីទីបីឡើយ។</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="terms-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-sm hidden p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeModal('terms-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center">
+                    <i data-lucide="file-text" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-slate-900" data-i18n="terms">លក្ខខណ្ឌសេវាកម្ម</h3>
+                <div class="text-slate-600 text-xs sm:text-sm space-y-3 leading-relaxed">
+                    <p data-i18n="termsText1">ដោយការប្រើប្រាស់ A2Z នៅកម្ពុជា អ្នកយល់ព្រមអនុវត្តតាមលក្ខខណ្ឌសេវាកម្មដូចខាងក្រោម។</p>
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base pt-2" data-i18n="termsHeader1">1. សេវាសង្គ្រោះបន្ទាន់</h4>
+                    <p data-i18n="termsText2">A2Z ដើរតួជាប្រព័ន្ធភ្ជាប់អ្នកបើកបររថយន្ត ជាមួយអ្នកបើកបរស្ទូចដែលមានអាជ្ញាប័ណ្ណ និងអនុវត្តតាមបទដ្ឋានសុវត្ថិភាព។</p>
+                    <h4 class="font-bold text-slate-900 text-sm sm:text-base pt-2" data-i18n="termsHeader2">2. ការកំណត់តម្លៃ</h4>
+                    <p data-i18n="termsText3">តម្លៃសេវាកម្មស្ទូចទាំងអស់ត្រូវបានគណនាផ្អែកលើចម្ងាយ និងប្រភេទរថយន្តមុនពេលបញ្ជាក់បញ្ជូន។</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-sm hidden p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeModal('contact-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="space-y-5">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center shrink-0">
+                        <i data-lucide="headphones" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900" data-i18n="contact">ទាក់ទងជំនួយ</h3>
+                        <p class="text-xs text-slate-500" data-i18n="contactSub">ផ្នែកជំនួយបន្ទាន់ និងខ្សែទូរស័ព្ទ 24/7</p>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <a href="tel:+85512345678" class="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-a2zYellow transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-a2zYellow text-slate-950 flex items-center justify-center shrink-0">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="block text-xs text-slate-500" data-i18n="phoneHotline">ខ្សែទូរស័ព្ទបន្ទាន់</span>
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">+855 (0) 12 345 678</span>
+                        </div>
+                    </a>
+
+                    <a href="https://t.me/A2ZSupportKH" target="_blank" class="flex items-center space-x-3 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-a2zYellow transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center shrink-0">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="block text-xs text-slate-500">Telegram Channel</span>
+                            <span class="font-bold text-slate-900 text-sm sm:text-base">@A2ZSupportKH</span>
+                        </div>
+                    </a>
+                </div>
+
+                <form id="contact-form" class="space-y-3 pt-1">
+                    <input type="text" required placeholder="ឈ្មោះរបស់អ្នក" data-i18n-placeholder="namePlaceholder" class="w-full bg-slate-50 border border-slate-300 focus:border-a2zYellow rounded-xl px-4 py-3 text-sm text-slate-900 outline-none">
+                    <textarea required rows="3" placeholder="តើយើងអាចជួយអ្នកដោយរបៀបណា?" data-i18n-placeholder="msgPlaceholder" class="w-full bg-slate-50 border border-slate-300 focus:border-a2zYellow rounded-xl px-4 py-3 text-sm text-slate-900 outline-none resize-none"></textarea>
+                    <button type="submit" class="w-full bg-a2zYellow hover:bg-a2zYellowDark text-slate-950 font-black py-3.5 rounded-xl transition-all shadow-md shadow-a2zYellow/20 text-sm" data-i18n="sendMsg">ផ្ញើសារ</button>
+                </form>
+                <div id="contact-success" class="hidden text-xs text-center font-bold text-amber-600"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="safety-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 backdrop-blur-sm hidden p-4">
+        <div class="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeModal('safety-modal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="space-y-4">
+                <div class="w-12 h-12 rounded-2xl bg-a2zYellow text-slate-950 flex items-center justify-center">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900" id="safety-modal-title">សុវត្ថិភាព</h3>
+                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed" id="safety-modal-body">
+                    ព័ត៌មានលម្អិតអំពីសុវត្ថិភាព។
+                </p>
+                <button onclick="closeModal('safety-modal')" class="w-full bg-slate-100 text-slate-900 font-bold py-3 rounded-xl hover:bg-slate-200 transition-colors mt-2 text-sm" data-i18n="close">
+                    បិទ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const translations = {
+            km: {
+                navFeatures: "ហេតុអ្វីអ្នកប្រហែលជាត្រូវការ A2Z",
+                langKm: "ភាសាខ្មែរ",
+                langEn: "English",
+                navHowItWorks: "របៀបប្រើប្រាស់",
+                navSafety: "សុវត្ថិភាព និងទំនុកចិត្ត",
+                navContact: "ទាក់ទងយើង",
+                heroBadge: "សេវាសង្គ្រោះរថយន្ត 24/7 នៅកម្ពុជា",
+                heroTitleHighlight: "ចាប់ពីចំណុច A ដល់ចំណុច Z",
+                heroSubtitle: "A2Z អាចជួយអ្នកចេញពីផ្លូវភ្លាមៗ ជាមួយអ្នកបើកបរស្ទូចដែលបានផ្ទៀងផ្ទាត់។",
+                heroBtnDispatch: "ហៅឡានស្ទូចបន្ទាន់",
+                heroBtnSafety: "ស្វែងយល់ពីសុវត្ថិភាព",
+                statNight: "24/7 មិនថ្ងៃយប់",
+                statDispatch: "មកដល់លឿនរហ័ស",
+                statVerified: "អ្នកបើកបរផ្ទៀងផ្ទាត់",
+                liveRescue: "ប្រព័ន្ធស្ទូចកំពុងដំណើរការ",
+                heroCardTitle: "ភ្នំពេញ និងខេត្តធំៗ",
+                heroCardDesc: "រថយន្តស្ទូចទំនើបត្រៀមខ្លួនរួចជាស្រេចនៅទីតាំង GPS របស់អ្នក។",
+                stepsSub: "ងាយស្រួល និងរហ័ស",
+                stepsTitle: "របៀបប្រើប្រាស់ A2Z",
+                stepsDesc: "3 ជំហានងាយៗដើម្បីជួយសង្គ្រោះរថយន្តរបស់អ្នកនៅពេលយប់ជ្រៅ។",
+                step1Title: "1. ស្នើសុំស្ទូចឡាន",
+                step1Desc: "បើកកម្មវិធី A2Z ចុច 'ស្នើសុំស្ទូច' បញ្ជាក់ទីតាំង និងជ្រើសរើសប្រភេទរថយន្តរបស់អ្នក។",
+                step2Title: "2. ទទួលការមកដល់លឿន",
+                step2Desc: "អ្នកបើកបរស្ទូចដែលនៅជិតបំផុតនឹងទទួលការងារ និងបើកមករកអ្នកផ្ទាល់យ៉ាងលឿន។",
+                step3Title: "3. បញ្ជូនដល់ទីតាំង",
+                step3Desc: "រថយន្តរបស់អ្នកត្រូវបានដឹកជញ្ជូនដោយសុវត្ថិភាពទៅកាន់ហាងជួសជុល ឬជាងដែលអ្នកទុកចិត្ត។",
+                featuresSub: "បង្កើតឡើងសម្រាប់កម្ពុជា",
+                featuresTitle: "ហេតុអ្វីអ្នកប្រហែលជាត្រូវការ A2Z",
+                featuresDesc: "A2Z អាចជួយអ្នកចេញពីផ្លូវភ្លាមៗ ជាមួយអ្នកបើកបរស្ទូចដែលបានផ្ទៀងផ្ទាត់។",
+                feat1Title: "សង្គ្រោះបន្ទាន់ 24/7",
+                feat1Desc: "លែងបារម្ភពេលឡានខូចលើផ្លូវងងឹតពេលជាងបិទទ្វារ។",
+                feat2Title: "តម្លៃច្បាស់លាស់មុនហៅ",
+                feat2Desc: "គ្មានការគិតប្រាក់លាក់បាំង ដឹងតម្លៃមុនពេលសម្រេចចិត្ត។",
+                feat3Title: "តាមដានផែនទីផ្ទាល់",
+                feat3Desc: "មើលរថយន្តស្ទូចបើកមករកអ្នកលើផែនទីផ្ទាល់ តាមទូរស័ព្ទរបស់អ្នក។",
+                driverDispatched: "អ្នកបើកបរបានទទួលការងារ (1.8 km)",
+                driverInfo: "អ្នកជំនាញស្ទូចឡាន • 4.9 ★ (284 ដង)",
+                pickupLabel: "ទីតាំងទទួល",
+                dropLabel: "ទីតាំងជួសជុល",
+                pickupLocation: "មហាវិថីសហព័ន្ធរុស្ស៊ី ភ្នំពេញ",
+                dropLocation: "ការ៉ាស់ជួសជុលរថយន្ត 24/7",
+                etaLabel: "ការរំពឹងទុកមកដល់",
+                insuranceNote: "មានអាជ្ញាធរ និងធានារ៉ាប់រងពេញលេញសម្រាប់ការដឹកជញ្ជូនពេលយប់។",
+                safetySub: "សុវត្ថិភាពជាចម្បង",
+                safetyTitle: "ការធានាសុវត្ថិភាព និងទំនុកចិត្ត",
+                safetyDesc: "យើងផ្តល់អាទិភាពលើសុវត្ថិភាព និងភាពស្ងប់ចិត្តរបស់អ្នករាល់ពេលមានអាសន្ន។",
+                s1Title: "អ្នកបើកបរផ្ទៀងផ្ទាត់",
+                s1Desc: "ពិនិត្យប្រវត្តិរូបស្អាតស្អំ និងប័ណ្ណបើកបរពាណិជ្ជកម្មត្រឹមត្រូវ។",
+                s2Title: "ចែករំលែក GPS ផ្ទាល់",
+                s2Desc: "ចែករំលែកទីតាំង និងព័ត៌មានអ្នកបើកបរទៅកាន់គ្រួសារបានភ្លាមៗ។",
+                s3Title: "ខ្សែទូរស័ព្ទជំនួយ 24/7",
+                s3Desc: "ទាក់ទងផ្ទាល់មកកាន់ក្រុមការងារសង្គ្រោះបន្ទាន់បានគ្រប់ពេល។",
+                s4Title: "គោលការណ៍តម្លៃសមរម្យ",
+                s4Desc: "គណនាតម្លៃច្បាស់លាស់មុនហៅ គ្មានការទារប្រាក់លើសលុបពេលយប់។",
+                learnMore: "អានបន្ថែម",
+                copyright: "© 2026 A2Z Technologies Inc. រក្សាសិទ្ធិគ្រប់យ៉ាង។ សេវាស្ទូច និងសង្គ្រោះរថយន្តនៅកម្ពុជា។",
+                privacy: "គោលការណ៍ឯកជនភាព",
+                terms: "លក្ខខណ្ឌសេវាកម្ម",
+                contact: "ទាក់ទងជំនួយ",
+                contactSub: "ផ្នែកជំនួយបន្ទាន់ និងខ្សែទូរស័ព្ទ 24/7",
+                phoneHotline: "ខ្សែទូរស័ព្ទបន្ទាន់",
+                namePlaceholder: "ឈ្មោះរបស់អ្នក",
+                msgPlaceholder: "តើយើងអាចជួយអ្នកដោយរបៀបណា?",
+                sendMsg: "ផ្ញើសារ",
+                close: "បិទ",
+                privacyText1: "នៅ A2Z Technologies យើងគោរពឯកជនភាពរបស់អ្នក និងប្តេជ្ញាការពារទិន្នន័យផ្ទាល់ខ្លួនរបស់អ្នក នៅពេលអ្នកស្នើសុំសេវាស្ទូច និងសង្គ្រោះបន្ទាន់នៅកម្ពុជា។",
+                privacyHeader1: "1. ព័ត៌មានដែលយើងប្រមូល",
+                privacyText2: "យើងប្រមូលកូអរដោនេ GPS លេខទូរស័ព្ទ និងព័ត៌មានរថយន្តរបស់អ្នក ដើម្បីភ្ជាប់ទំនាក់ទំនងជាមួយអ្នកបើកបរស្ទូច។",
+                privacyHeader2: "2. ការប្រើប្រាស់ទិន្នន័យ",
+                privacyText3: "ទិន្នន័យទីតាំងរបស់អ្នកត្រូវបានប្រកាសតែនៅពេលអ្នកស្នើសុំសង្គ្រោះប៉ុណ្ណោះ។ យើងមិនដែលលក់ទិន្នន័យរបស់អ្នកទៅកាន់ភាគីទីបីឡើយ។",
+                termsText1: "ដោយការប្រើប្រាស់ A2Z នៅកម្ពុជា អ្នកយល់ព្រមអនុវត្តតាមលក្ខខណ្ឌសេវាកម្មដូចខាងក្រោម។",
+                termsHeader1: "1. សេវាសង្គ្រោះបន្ទាន់",
+                termsText2: "A2Z ដើរតួជាប្រព័ន្ធភ្ជាប់អ្នកបើកបររថយន្ត ជាមួយអ្នកបើកបរស្ទូចដែលមានអាជ្ញាប័ណ្ណ និងអនុវត្តតាមបទដ្ឋានសុវត្ថិភាព។",
+                termsHeader2: "2. ការកំណត់តម្លៃ",
+                termsText3: "តម្លៃសេវាកម្មស្ទូចទាំងអស់ត្រូវបានគណនាផ្អែកលើចម្ងាយ និងប្រភេទរថយន្តមុនពេលបញ្ជាក់បញ្ជូន។"
+            },
+            en: {
+                navFeatures: "Why you might need A2Z",
+                langKm: "Khmer",
+                langEn: "English",
+                navHowItWorks: "How It Works",
+                navSafety: "Safety & Trust",
+                navContact: "Contact Us",
+                heroBadge: "Cambodia's 24/7 Roadside Rescue",
+                heroTitleHighlight: "Go from Point A to Point Z",
+                heroSubtitle: "A2Z can help you off the road instantly with verified tow truck operators.",
+                heroBtnDispatch: "Emergency Dispatch",
+                heroBtnSafety: "Explore Safety",
+                statNight: "24/7 Night & Day",
+                statDispatch: "Quick Dispatch",
+                statVerified: "Verified Drivers",
+                liveRescue: "Live Rescue Dispatch Active",
+                heroCardTitle: "Phnom Penh & Major Provinces",
+                heroCardDesc: "Professional flatbed towing ready at your exact GPS pin.",
+                stepsSub: "Simple & Fast",
+                stepsTitle: "How A2Z Works",
+                stepsDesc: "3 easy steps to rescue your vehicle when stranded late at night.",
+                step1Title: "1. Request Tow",
+                step1Desc: "Open the A2Z app, tap 'Request Tow', confirm your precise GPS location, and select your car type.",
+                step2Title: "2. Fast Pickup",
+                step2Desc: "A nearby certified tow truck driver accepts your request instantly and navigates directly to your roadside spot.",
+                step3Title: "3. Secure Drop",
+                step3Desc: "Your vehicle is securely loaded onto a flatbed and transported straight to a trusted repair garage or mechanic.",
+                featuresSub: "Built for Cambodia",
+                featuresTitle: "Why you might need A2Z",
+                featuresDesc: "A2Z can help you off the road instantly with verified tow truck operators.",
+                feat1Title: "24/7 Midnight Rescue",
+                feat1Desc: "Never get stranded on dark highways when standard mechanics are closed.",
+                feat2Title: "Transparent Upfront Pricing",
+                feat2Desc: "No hidden fees or haggling. Know your tow fare before you book.",
+                feat3Title: "Live Map Tracking",
+                feat3Desc: "Watch your tow truck approach live on the map, right from your phone.",
+                driverDispatched: "Driver Dispatched (1.8 km)",
+                driverInfo: "Flatbed Specialist • 4.9 ★ (284 Trips)",
+                pickupLabel: "Pickup Location",
+                dropLabel: "Destination Repair",
+                pickupLocation: "Monivong Blvd, Phnom Penh",
+                dropLocation: "24/7 Auto Repair Garage",
+                etaLabel: "Estimated Arrival",
+                insuranceNote: "Licensed operators, fully insured for safe nighttime transport.",
+                safetySub: "Safety First",
+                safetyTitle: "Our Safety & Trust Guarantee",
+                safetyDesc: "We prioritize your protection and peace of mind on every single breakdown call.",
+                s1Title: "Verified Drivers",
+                s1Desc: "Comprehensive criminal record checks and commercial driving license verification.",
+                s2Title: "GPS Live Sharing",
+                s2Desc: "Share your live rescue route and driver details with family or friends instantly.",
+                s3Title: "24/7 Hotline Support",
+                s3Desc: "Direct connection to our local dispatch emergency hotline team any time of night.",
+                s4Title: "Fair Price Policy",
+                s4Desc: "Guaranteed fixed prices calculated upfront. Zero price gouging during late hours.",
+                learnMore: "Learn more",
+                copyright: "© 2026 A2Z Technologies Inc. All rights reserved. Safe roadside rescue in Cambodia.",
+                privacy: "Privacy Policy",
+                terms: "Terms of Service",
+                contact: "Contact Support",
+                contactSub: "24/7 Hotline & Emergency Helpdesk",
+                phoneHotline: "Emergency Hotline",
+                namePlaceholder: "Your Name",
+                msgPlaceholder: "How can we help you?",
+                sendMsg: "Send Message",
+                close: "Close",
+                privacyText1: "At A2Z Technologies, we respect your privacy and are committed to protecting your personal data when you request towing and emergency roadside assistance across Cambodia.",
+                privacyHeader1: "1. Information We Collect",
+                privacyText2: "We collect your device GPS coordinates, phone number, vehicle information, and pickup destination strictly for matching you with certified tow operators.",
+                privacyHeader2: "2. How Data is Used",
+                privacyText3: "Your location data is only accessed when you actively initiate a rescue request. We never sell your personal contact details to third-party advertisers.",
+                termsText1: "By accessing or using the A2Z roadside platform in Cambodia, you agree to comply with and be bound by the following service terms.",
+                termsText2: "A2Z operates as a dispatch platform connecting motorists with licensed tow truck operators who follow strict safety standards.",
+                termsText3: "All towing service fares are calculated based on distance and vehicle type before your dispatch is confirmed.",
+                termsHeader1: "1. Emergency Dispatch Services",
+                termsHeader2: "2. Pricing and Fares"
+            }
+        };
+
+        let currentLang = 'km';
+        let langDropdownOpen = false;
+        let menuOpen = false;
+
+        function handleLanguageChange(selectedLang) {
+            currentLang = selectedLang;
+            document.documentElement.lang = selectedLang;
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    el.placeholder = translations[currentLang][key];
+                }
+            });
+
+            // Update language dropdown label and check marks
+            const langLabel = document.getElementById('lang-label');
+            const kmCheck = document.getElementById('lang-km-check');
+            const enCheck = document.getElementById('lang-en-check');
+            if (langLabel && translations[currentLang]) {
+                langLabel.textContent = currentLang === 'km' ? 'ភាសាខ្មែរ' : 'English';
+            }
+            if (kmCheck && enCheck) {
+                kmCheck.classList.toggle('hidden', currentLang !== 'km');
+                enCheck.classList.toggle('hidden', currentLang !== 'en');
+            }
+      }
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMenu() {
+            menuOpen = !menuOpen;
+            const menuDropdown = document.getElementById('menu-dropdown');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            const menuToggle = document.getElementById('menu-toggle');
+            if (menuDropdown && menuIconOpen && menuIconClose && menuToggle) {
+                if (menuOpen) {
+                    menuDropdown.classList.remove('hidden');
+                    menuIconOpen.classList.add('hidden');
+                    menuIconClose.classList.remove('hidden');
+                    menuToggle.setAttribute('aria-expanded', 'true');
+                } else {
+                    menuDropdown.classList.add('hidden');
+                    menuIconOpen.classList.remove('hidden');
+                    menuIconClose.classList.add('hidden');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            }
+        }
+
+        function closeMenu() {
+            if (!menuOpen) return;
+            menuOpen = false;
+            const menuDropdown = document.getElementById('menu-dropdown');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            const menuToggle = document.getElementById('menu-toggle');
+            if (menuDropdown && menuIconOpen && menuIconClose && menuToggle) {
+                menuDropdown.classList.add('hidden');
+                menuIconOpen.classList.remove('hidden');
+                menuIconClose.classList.add('hidden');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        function toggleLangDropdown() {
+            langDropdownOpen = !langDropdownOpen;
+            const langMenu = document.getElementById('lang-menu');
+            const langChevron = document.getElementById('lang-chevron');
+            const langBtn = document.querySelector('#lang-dropdown button[aria-haspopup]');
+            if (langMenu && langChevron && langBtn) {
+                if (langDropdownOpen) {
+                    langMenu.classList.remove('hidden');
+                    langChevron.classList.add('rotate-180');
+                    langBtn.setAttribute('aria-expanded', 'true');
+                } else {
+                    langMenu.classList.add('hidden');
+                    langChevron.classList.remove('rotate-180');
+                    langBtn.setAttribute('aria-expanded', 'false');
+                }
+            }
+        }
+
+        function closeLangDropdown() {
+            if (!langDropdownOpen) return;
+            langDropdownOpen = false;
+            const langMenu = document.getElementById('lang-menu');
+            const langChevron = document.getElementById('lang-chevron');
+            const langBtn = document.querySelector('#lang-dropdown button[aria-haspopup]');
+            if (langMenu && langChevron && langBtn) {
+                langMenu.classList.add('hidden');
+                langChevron.classList.remove('rotate-180');
+                langBtn.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        function selectLang(lang) {
+            handleLanguageChange(lang);
+            closeLangDropdown();
+        }
+
+        // Close dropdowns on outside click
+        document.addEventListener('click', (e) => {
+            const langDropdown = document.getElementById('lang-dropdown');
+            if (langDropdown && !langDropdown.contains(e.target)) {
+                closeLangDropdown();
+            }
+            const menuWrap = document.getElementById('menu-wrap');
+            if (menuOpen && menuWrap && !menuWrap.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        // Close dropdowns on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLangDropdown();
+                closeMenu();
+            }
+        });
+
+        const safetyDetails = {
+            1: {
+                enTitle: "Verified Tow Operators",
+                enBody: "Every tow truck driver on the A2Z network undergoes identity verification, background screening, and commercial driving license validation in Cambodia before taking calls.",
+                kmTitle: "អ្នកបើកបរស្ទូចដែលបានផ្ទៀងផ្ទាត់",
+                kmBody: "អ្នកបើកបររថយន្តស្ទូចទាំងអស់នៅក្នុងប្រព័ន្ធ A2Z ត្រូវឆ្លងកាត់ការពិនិត្យអត្តសញ្ញាណ ពិនិត្យប្រវត្តិរូប និងប័ណ្ណបើកបរពាណិជ្ជកម្មត្រឹមត្រូវនៅកម្ពុជា។"
+            },
+            2: {
+                enTitle: "GPS Live Location Sharing",
+                enBody: "When your rescue begins, a live map link can be sent to your family members via Telegram or SMS so they can trace your exact tow route in real time.",
+                kmTitle: "ការចែករំលែក GPS ផ្ទាល់",
+                kmBody: "នៅពេលការស្ទូចចាប់ផ្តើម តំណភ្ជាប់ផែនទីផ្ទាល់អាចត្រូវបានផ្ញើទៅកាន់ក្រុមគ្រួសារតាម Telegram ឬ SMS ដើម្បីតាមដានផ្លូវស្ទូចក្នុងពេលជាក់ស្តែង។"
+            },
+            3: {
+                enTitle: "24/7 Emergency Dispatch Center",
+                enBody: "Our multilingual dispatch team operates non-stop day and night. If you encounter any issue or need assistance, an operator is available immediately.",
+                kmTitle: "មជ្ឈមណ្ឌលសង្គ្រោះបន្ទាន់ 24/7",
+                kmBody: "ក្រុមការងាររបស់យើងបម្រើការ 24 ម៉ោងជារៀងរាល់ថ្ងៃ។ ប្រសិនបើអ្នកជួបបញ្ហា ឬត្រូវការជំនួយ អ្នកប្រតិបត្តិការនឹងឆ្លើយតបភ្លាមៗ។"
+            },
+            4: {
+                enTitle: "Upfront Fixed Fare Guarantee",
+                enBody: "No unexpected nighttime surcharges or haggling. Your towing price is locked in based on standard distance metrics before the driver arrives.",
+                kmTitle: "ការធានាតម្លៃច្បាស់លាស់មុនហៅ",
+                kmBody: "គ្មានការទារប្រាក់បន្ថែមមិនប្រក្រតីពេលយប់ឡើយ។ តម្លៃស្ទូចរបស់អ្នកត្រូវបានកំណត់ច្បាស់លាស់ផ្អែកលើចម្ងាយផ្លូវមុនពេលឡានស្ទូចមកដល់។"
+            }
+        };
+
+        function openSafetyModal(index) {
+            const info = safetyDetails[index];
+            if (!info) return;
+
+            document.getElementById('safety-modal-title').textContent = currentLang === 'en' ? info.enTitle : info.kmTitle;
+            document.getElementById('safety-modal-body').textContent = currentLang === 'en' ? info.enBody : info.kmBody;
+            openModal('safety-modal');
+        }
+
+        document.getElementById('contact-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const msg = document.getElementById('contact-success');
+            msg.textContent = currentLang === 'en' ? '✅ Message sent! Our support dispatch will contact you shortly.' : '✅ បានផ្ញើសាររៀបរយ! ក្រុមការងារជំនួយនឹងទាក់ទងទៅអ្នកឆាប់ៗ។';
+            msg.classList.remove('hidden');
+            this.reset();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            handleLanguageChange('km');
+        });
+    </script>
+</body>
+</html>
